@@ -26,27 +26,23 @@ const plugins = [
 ];
 ```
 
-Now also supports multiple entrypoints via a map of metadata files:
+Optional third parameter can be used to append lines to the resulting metadata block (the transform will be applied after concatenation):
+
 
 ```js
 import userscript from 'rollup-plugin-userscript';
 
-const input = {
-  foo: 'foo.js',
-  bar: 'bar.js',
-  baz: 'baz.js',
-};
-
 const plugins = [
+  // ...
   userscript(
-    { 
-      foo: 'foo.meta.js',
-      bar: 'bar.meta.js',
-      default: 'meta.js', // Used for entrypoints w/o specific metadata in the map
-    },
+    path.resolve('src/meta.js'),
     meta => meta
       .replace('process.env.VERSION', pkg.version)
       .replace('process.env.AUTHOR', pkg.author),
+    [
+      '// @version   process.env.VERSION',
+      '// @author    process.env.AUTHOR',
+    ]
   ),
 ];
 ```

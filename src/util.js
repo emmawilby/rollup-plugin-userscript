@@ -43,13 +43,18 @@ export function collectGmApi(ast) {
   return grantSetPerFile;
 }
 
-export function getMetadata(metaFileContent, additionalGrantList) {
+export function getMetadata(metaFileContent, additionalGrantList, addtlLines = []) {
   const lines = metaFileContent.split('\n').map(line => line.trim());
   const start = lines.indexOf(META_START);
-  const end = lines.indexOf(META_END);
+  let end = lines.indexOf(META_END);
   if (start < 0 || end < 0) {
     throw new Error('Invalid metadata block. For more details see https://violentmonkey.github.io/api/metadata-block/');
   }
+  if (addtlLines) {
+    lines.splice(end, 0, ...addtlLines.map(adl => adl.trim()))
+    end = lines.indexOf(META_END);
+  }
+
   const grantSet = new Set();
   const entries = lines.slice(start + 1, end)
     .map(line => {
