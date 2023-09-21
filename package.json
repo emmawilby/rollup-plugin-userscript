@@ -1,8 +1,8 @@
 {
-  "name": "rollup-plugin-userscript",
-  "version": "0.2.0",
-  "description": "Rollup plugin for userscript",
-  "author": "Gerald <gera2ld@live.com>",
+  "name": "@emmawilby/rollup-plugin-userscript",
+  "version": "0.2.1",
+  "description": "Fork of violentmonkey's Rollup plugin for userscript",
+  "author": "Gerald <gera2ld@live.com>,Emma <me@emma.gay>",
   "license": "MIT",
   "scripts": {
     "ci": "run-s lint",
@@ -42,7 +42,7 @@
     "del-cli": "^5.0.0",
     "husky": "^8.0.3"
   },
-  "repository": "git@github.com:violentmonkey/rollup-plugin-userscript.git",
+  "repository": "git@github.com:emmawilby/rollup-plugin-userscript.git",
   "engines": {
     "node": ">=16"
   }
