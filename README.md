@@ -25,3 +25,28 @@ const plugins = [
   ),
 ];
 ```
+
+Now also supports multiple entrypoints via a map of metadata files:
+
+```js
+import userscript from 'rollup-plugin-userscript';
+
+const input = {
+  foo: 'foo.js',
+  bar: 'bar.js',
+  baz: 'baz.js',
+};
+
+const plugins = [
+  userscript(
+    { 
+      foo: 'foo.meta.js',
+      bar: 'bar.meta.js',
+      default: 'meta.js', // Used for entrypoints w/o specific metadata in the map
+    },
+    meta => meta
+      .replace('process.env.VERSION', pkg.version)
+      .replace('process.env.AUTHOR', pkg.author),
+  ),
+];
+```
